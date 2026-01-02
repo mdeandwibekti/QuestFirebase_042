@@ -93,3 +93,32 @@ fun HomeBody(
     }
 }
 
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier.size(200.dp),
+        painter = painterResource(R.drawable.loading_img__1_),
+        contentDescription = stringResource(R.string.loading)
+    )
+}
+
+@Composable
+fun ErrorScreen(
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = stringResource(R.string.gagal))
+        Button(
+            onClick = retryAction,
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(stringResource(R.string.retry))
+        }
+    }
+}
+

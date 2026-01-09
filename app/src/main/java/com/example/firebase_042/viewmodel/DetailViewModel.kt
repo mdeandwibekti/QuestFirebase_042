@@ -44,4 +44,13 @@ class DetailViewModel(
                 StatusUIDetail.Success(
                     satusiswa = repositorySiswa.getSatuSiswa(idSiswa)
                 )
+            } catch (e: IOException) {
+                StatusUIDetail.Error
+            } catch (e: Exception) {
+                StatusUIDetail.Error
+            }
+        }
+    }
+
+
 }

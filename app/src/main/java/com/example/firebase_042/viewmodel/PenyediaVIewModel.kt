@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.firebase_042.repositori.AplikasiDataSiswa
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 
 
 fun CreationExtras.aplikasiDataSiswa(): AplikasiDataSiswa = (
@@ -15,5 +16,7 @@ object PenyediaViewModel {
     val Factory = viewModelFactory {
         initializer { HomeViewModel(aplikasiDataSiswa().container.repositorySiswa) }
         initializer { EntryViewModel(aplikasiDataSiswa().container.repositorySiswa) }
+        initializer { DetailViewModel(this.createSavedStateHandle(), aplikasiDataSiswa().container.repositorySiswa) }
+        initializer { EditViewModel(this.createSavedStateHandle(), aplikasiDataSiswa().container.repositorySiswa) }
     }
 }

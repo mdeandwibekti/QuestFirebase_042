@@ -48,7 +48,9 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = navigateToItemEntry,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
+                modifier = Modifier.padding(
+                    dimensionResource(id = R.dimen.padding_large)
+                )
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -81,13 +83,13 @@ fun HomeBody(
     ) {
         when (statusUiSiswa) {
             is StatusUiSiswa.Loading -> LoadingScreen()
-            is StatusUiSiswa.Success -> DaftarSiswa(
+            is StatusUiSiswa.Success -> DataSiswa(
                 itemSiswa = statusUiSiswa.siswa,
                 onSiswaClick = { onSiswaClick(it.id.toInt()) }
             )
             is StatusUiSiswa.Error -> ErrorScreen(
-                retryAction = retryAction,
-                modifier = Modifier.fillMaxSize()
+                retryAction,
+                modifier = modifier.fillMaxSize()
             )
         }
     }
@@ -103,36 +105,30 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ErrorScreen(
-    retryAction: () -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = stringResource(R.string.gagal))
-        Button(
-            onClick = retryAction,
+        Text(
+            text = stringResource(R.string.gagal),
             modifier = Modifier.padding(16.dp)
-        ) {
+        )
+        Button(onClick = retryAction) {
             Text(stringResource(R.string.retry))
         }
     }
 }
 
 @Composable
-fun DaftarSiswa(
+fun DataSiswa(
     itemSiswa: List<Siswa>,
     onSiswaClick: (Siswa) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
-        items(
-            items = itemSiswa,
-            key = { it.id }
-        ) { person ->
+        items(items = itemSiswa, key = { it.id }) { person ->
             ItemSiswa(
                 siswa = person,
                 modifier = Modifier
@@ -163,18 +159,18 @@ fun ItemSiswa(
             ) {
                 Text(
                     text = siswa.nama,
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
                 )
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(Modifier.weight(1f))
                 Icon(
                     imageVector = Icons.Default.Phone,
                     contentDescription = null
                 )
-                Text(
-                    text = siswa.telpon,
-                    style = MaterialTheme.typography.titleMedium
-                )
             }
+            Text(
+                text = siswa.telpon,
+                style = MaterialTheme.typography.titleMedium
+            )
             Text(
                 text = siswa.alamat,
                 style = MaterialTheme.typography.titleMedium

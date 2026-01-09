@@ -1,5 +1,6 @@
 package com.example.firebase_042.view.controllNavigasi
 
+import android.R.attr.type
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -36,6 +37,13 @@ fun HostNavigasi(
         composable(DestinasiEntry.route){
             EntrySiswaScreen(navigateBack = { navController.navigate(DestinasiHome.route)
             })
+        }
+
+        composable (DestinasiDetail.routeWithArgs,arguments = listOf(navArgument
+            (DestinasiDetail.itemIdArg) {
+            type = NavType.StringType })
+        ){
+
         }
     }
 }

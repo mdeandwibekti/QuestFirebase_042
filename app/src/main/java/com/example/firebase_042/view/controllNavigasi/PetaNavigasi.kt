@@ -9,9 +9,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.firebase_042.view.DetailSiswaScreen
 import com.example.firebase_042.view.EntrySiswaScreen
 import com.example.firebase_042.view.HomeScreen
 import com.example.firebase_042.view.route.DestinasiDetail
+import com.example.firebase_042.view.route.DestinasiEdit
 import com.example.firebase_042.view.route.DestinasiEntry
 import com.example.firebase_042.view.route.DestinasiHome
 
@@ -43,6 +45,9 @@ fun HostNavigasi(
             (DestinasiDetail.itemIdArg) {
             type = NavType.StringType })
         ){
+            DetailSiswaScreen(navigateToEditItem = {navController.navigate("${DestinasiEdit
+                .route}/$it")},
+                navigateBack = { navController.navigate(DestinasiHome.route)})
 
         }
     }
